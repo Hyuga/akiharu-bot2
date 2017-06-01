@@ -39,7 +39,7 @@ def makeWebhookResult(req):
 
     cost = {'capricciosa':10, 'margherita':15, 'pepperoni':20, 'marinara':25}
 
-    speech = "Wonderful! Great!! Order is" + type + "," + size + "," + sauce + "," + crust + "." + "It will be delivered to you within 30 minutes!" + "Price is $" + cost + "."
+    speech = "Wonderful! Great!! Order is" + type + "," + size + "," + sauce + "," + crust + "." + "It will be delivered to you within 30 minutes!" + "Price is $" + str(cost[type]) + "."
 
     print("Response:")
     print(speech)
