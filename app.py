@@ -28,34 +28,31 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "order":
+    if req.get("result").get("action") != "shipping.cost":
         return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    type = parameters.get("type")
-    size = parameters.get("size")
-    sauce = parameters.get("sauce")
-    crust = parameters.get("crust")
+    zone = parameters.get("shipping-zone")
 
-    price = {'capricciosa':1000, 'four cheese':1500, 'frutti di mare':2000, 'margherita':2500}
+    cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
 
-    #speech = type + "、" + size + "サイズ、" + sauce + "ソース、" + crust + "でご注文承りました。料金は" + price + "円です。30分少々でお届けに上がります！"
-    speech = type + price
+    speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
+
     print("Response:")
     print(speech)
 
     return {
-        "speech": "speech",
-        "displayText": "speech",
-        "data": {},
-        "contextOut": [],
-        "source": "agent"
+        "speech": speech,
+        "displayText": speech,
+        #"data": {},
+        # "contextOut": [],
+        "source": "apiai-onlinestore-shipping"
     }
 
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
-    #print "Starting app on port %d" % port
+    print "Starting app on port %d" % port
 
     app.run(debug=True, port=port, host='0.0.0.0')
