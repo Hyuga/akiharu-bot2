@@ -33,10 +33,13 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     type = parameters.get("type")
+    size = parameters.get("size")
+    crust = parameters.get("crust")
+    sauce = parameters.get("sauce")
 
     cost = {'capricciosa':10, 'margherita':15, 'pepperoni':20, 'marinara':25}
 
-    speech = "cost is " + str(cost[type]) + " euros."
+    speech = "Wonderful! Great!! Order is" + type + "," + size + "," + sauce + "," + crust + "." + "It will be delivered to you within 30 minutes!" + "Price is $" + cost + "."
 
     print("Response:")
     print(speech)
